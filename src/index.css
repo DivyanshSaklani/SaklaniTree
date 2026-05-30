@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --gold: #c8932a;
+  --gold-light: #e8b84b;
+  --gold-pale: #fdf5e2;
+  --cream: #fbf7ee;
+  --paper-white: #ffffff;
+  --bark: #312111;
+  --bark-mid: #5c4228;
+  --bark-light: #8e6d4c;
+  --leaf: #1e3f14;
+  --line: #d1b884;
+  --shadow: rgba(49, 33, 17, 0.08);
+}
+
+/* Base custom scrollbar for absolute elegance */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f3e5;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8c7a6;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bfa87a;
+}
+
+/* Custom interactive dragging styles for visual chart canvas */
+.chart-container {
+  cursor: grab;
+}
+.chart-container:active {
+  cursor: grabbing;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CSS Tree Structure Table-Based Connector Rules
+   ───────────────────────────────────────────────────────────────── */
+.tree-container, .tree-container ul {
+  list-style: none;
+}
+
+.tree-container ul {
+  display: table;
+  margin: 0 auto;
+  padding-top: 32px;  /* Vertical length of connector lines */
+  position: relative;
+}
+
+.tree-container li {
+  display: table-cell;
+  text-align: center;
+  vertical-align: top;
+  padding: 32px 10px 0; /* Padding for horizontal margins */
+  position: relative;
+}
+
+/* Horizontal connectors - Left half */
+.tree-container li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 32px;
+  border-top: 2px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+/* Horizontal connectors - Right half */
+.tree-container li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 32px;
+  border-top: 2px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+/* Remove outer connector segments at ends */
+.tree-container li:first-child::before {
+  border-top: none;
+  border-right: none;
+}
+.tree-container li:last-child::after {
+  border-top: none;
+  border-left: none;
+}
+
+/* Only-child nodes don't need horizontal connector branches */
+.tree-container li:only-child::before,
+.tree-container li:only-child::after {
+  display: none;
+}
+.tree-container li:only-child {
+  padding-top: 0;
+}
+
+/* Vertical connector stem descending from parent */
+.tree-container ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 32px;
+  background: var(--line);
+}
+
+/* Root node has no parent, shouldn't have a top connector stem */
+.tree-container > ul::before {
+  display: none;
+}
+
+/* Curved elegant corners for horizontal branches */
+.tree-container li:last-child::before {
+  border-top: 2px solid var(--line);
+  border-right: 2px solid var(--line);
+  border-radius: 0 8px 0 0;
+}
+.tree-container li:first-child::after {
+  border-top: 2px solid var(--line);
+  border-left: 2px solid var(--line);
+  border-radius: 8px 0 0 0;
+}
+
+/* Smooth fade-in and scale zoom animations */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pop-in {
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

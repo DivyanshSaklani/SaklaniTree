@@ -1,0 +1,6 @@
+{
+  "name": "Saklani Family Tree",
+  "description": "A beautifully designed, interactive, and searchable family tree explorer for the Saklani family.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
